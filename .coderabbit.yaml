@@ -173,8 +173,8 @@ reviews:
         - Integration tests must cover all code paths
 
         Comments:
-        - All functions / methods must be commented
-        - All function / method parameters must be commented
+        - All interface properties must be commented
+        - All interface method parameters must be commented
 
         Frontend Naming:
         - Use "handle" prefix for event listeners
