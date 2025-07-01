@@ -16,13 +16,14 @@ reviews:
       instructions: |
         Review the JavaScript/TypeScript code and verify that it complies with the following naming conventions:
 
-        Boolean variables:
+        Variables:
         - Prefix boolean variables with "is", "are", "has", "must" or equivalent
         - Example: isActive, areUsersVisible, hasPermission, mustCreate
 
         Constants:
         - Global constants should be named using SNAKE_UPPERCASE and declared at the top of the file; they must be introduced as early as possible to avoid magic values scattered throughout the code and improve readability.
         - Generic constants: use an ENUM
+        - No useless assignment
 
         Use Case:
         - All constructor parameters must be gateway interfaces, service interfaces, repository interfaces or configuration objects
