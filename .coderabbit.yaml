@@ -1,13 +1,4 @@
 language: "fr"
-pull-request:
-  rules:
-    - name: branch-naming
-      description: The branch name must start with "feature/" or "fix/"
-      condition: "!pull_request.head_ref.matches('^(feature|fix)/.+$')"
-      message: >
-        The branch name does not follow the conventions.
-        It must start with `feature/` or `fix/`.
-      severity: error
 reviews:
   poem: false
   sequence_diagrams: false
@@ -17,7 +8,7 @@ reviews:
         Review the JavaScript/TypeScript code and verify that it complies with the following naming conventions:
 
         Variables:
-        - Prefix boolean variables with "is", "are", "has", "must" or equivalent
+        - Prefix boolean variables with "is", "has", "can", "should", or "will" to clearly indicate they return true/false values
         - Example: isActive, areUsersVisible, hasPermission, mustCreate
 
         Constants:
