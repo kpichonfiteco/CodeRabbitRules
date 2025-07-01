@@ -1,4 +1,13 @@
 language: "fr"
+pull-request:
+  rules:
+    - name: branch-naming
+      description: The branch name must start with "feature/" or "fix/"
+      condition: "!pull_request.head_ref.matches('^(feature|fix)/.+$')"
+      message: >
+        The branch name does not follow the conventions.
+        It must start with `feature/` or `fix/`.
+      severity: error
 reviews:
   poem: false
   sequence_diagrams: false
@@ -12,13 +21,8 @@ reviews:
         - Example: isActive, areUsersVisible, hasPermission, mustCreate
 
         Constants:
-        - File-specific constant: uppercase with underscores
+        - Global constants should be named using SNAKE_UPPERCASE and declared at the top of the file; they must be introduced as early as possible to avoid magic values scattered throughout the code and improve readability.
         - Generic constants: use an ENUM
-
-        Use Case Naming:
-        - Use singular form
-        - File name should not end with "UseCase"
-        - Must be in a contextual folder in src/hexagone/use-cases
 
         Use Case:
         - All constructor parameters must be gateway interfaces, service interfaces, repository interfaces or configuration objects
