@@ -149,8 +149,9 @@ reviews:
         - Use dependency injection to provide external library implementations
 
         Error Handling:
-        - Never throw errors outside /src/hexagone
-        - Errors other than "Error" must end with "Exception"
+        - Never throw outside /src/hexagone
+        - Errors other than native "Error" must end with "Exception"
+        - Native Errors can be throwed
         - Error messages must be in French
 
         Testing:
