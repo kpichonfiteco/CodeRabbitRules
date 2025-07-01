@@ -151,6 +151,7 @@ reviews:
         Error Handling:
         - Never throw errors outside /src/hexagone
         - Errors other than "Error" must end with "Exception"
+        - Error messages must be in French
 
         Testing:
         - All tests must be in the same folder as the code they are testing
