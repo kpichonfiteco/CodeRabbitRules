@@ -1,0 +1,236 @@
+language: "fr"
+reviews:
+  poem: false
+  sequence_diagrams: false
+  path_instructions:
+    - path: "**/*.ts"
+      instructions: |
+        Review the JavaScript/TypeScript code and verify that it complies with the following naming conventions:
+
+        Boolean variables:
+        - Prefix boolean variables with "is", "are", "has", "must" or equivalent
+        - Example: isActive, areUsersVisible, hasPermission, mustCreate
+
+        Constants:
+        - File-specific constant: uppercase with underscores
+        - Generic constants: use an ENUM
+
+        Use Case Naming:
+        - Use singular form
+        - File name should not end with "UseCase"
+        - Must be in a contextual folder in src/hexagone/use-cases
+
+        Use Case:
+        - All constructor parameters must be gateway interfaces, service interfaces, repository interfaces or configuration objects
+
+        Service Interface Naming:
+        - Use singular form
+        - File name should end with "Service"
+        - Must be in a contextual folder in src/hexagone/services
+        - Example: UserService.ts
+
+        Service Implementation Naming:
+        - Use singular form
+        - File name should end with "Service"
+        - Must be in the same folder as the service interface
+        - Must implement the Service Interface
+        - Must be prefixed with "Internal"
+        - Example: InternalUserService.ts
+
+        Service Stub Naming:
+        - Use singular form
+        - File name should end with "Stub"
+        - Must be in the same folder as the service interface
+        - Must implement the Service Interface
+        - Must not be prefixed
+        - Example: UserServiceStub.ts
+
+        Gateway Interface Naming:
+        - Use singular form
+        - File name should end with word like "Provider" or "Manager", "Builder", etc.
+        - Must be in src/hexagone/gateways
+        - Example: DateProvider.ts
+
+        Gateway Implementation Naming:
+        - Use singular form
+        - File name should end with word like "Provider" or "Manager", "Builder", etc.
+        - Must be in src/adapters/secondary/gateways
+        - Must implement the Gateway Interface
+        - Must be prefixed with the name of the entity it is a gateway for
+        - Example: InternalDateProvider.ts
+
+        Gateway Stub Naming:
+        - Use singular form
+        - File name should end with "Stub"
+        - Must be in src/adapters/secondary/gateways
+        - Must implement the Gateway Interface
+        - Must not be prefixed
+        - Example: DateProviderStub.ts
+
+        Repository Interface Naming:
+        - Use singular form
+        - File name should end with "Repository"
+        - Must be in src/hexagone/repositories
+        - Example: UserRepository.ts
+
+        Repository Implementation Naming:
+        - Use singular form
+        - File name should end with "Repository"
+        - Must be in src/adapters/secondary/repositories
+        - Must implement the Repository Interface
+        - Must be prefixed with the name of the entity it is a repository for
+        - Example: MongoUserRepository.ts
+
+        Repository Stub Naming:
+        - Use singular form
+        - File name should end with "Stub"
+        - Must be in src/adapters/secondary/repositories
+        - Must implement the Repository Interface
+        - Must not be prefixed
+        - Example: UserRepositoryStub.ts
+
+        Stub Implementation:
+        - Each stub method must return the value of a property named after the method + "Data"
+        - Each stub method must store its parameters in a property named after the method + "Params" in an array of objects containing each parameter
+        - Example: _createData, _createParams
+
+        Controller Naming:
+        - Use singular form
+        - File name should end with "Controller"
+        - Must be in a contextual folder in src/adapters/primary/controllers
+        - Example: UserController.ts
+
+        Enum Naming:
+        - Enum name must be in singular form
+        - Enum values must be in singular form
+        - Enum name must be in SNAKE_CASE_UPPERCASE
+        - Enum values must be in SNAKE_CASE_UPPERCASE
+        - Example: USER_ROLE.ADMIN
+
+        Class Properties:
+        - All class properties must be private
+        - Private properties must be prefixed with underscore (_)
+        - Use getters/setters for property access when needed
+        - Example: private _name: string;
+
+        File Naming:
+        - Class file name must exactly match the class name
+        - One class per file
+
+        Operator Style:
+        - Operators (+, -, *, /, &&, ||, etc.) should be placed at the beginning of the line
+
+        Code Structure:
+        - Use early returns to reduce nesting and improve readability
+
+        Type Safety:
+        - Never use the 'any' type
+        - Use proper TypeScript types or 'unknown' if type is truly unknown
+
+        Magic Values:
+        - No magic values/numbers in the code
+        - All constant values must be defined as named constants
+
+        Debugging:
+        - No console.log, console.error, console.warn, or console.debug statements in production code
+        - Use proper logging service instead
+        - Remove all debugging statements before committing
+
+        Directory Naming:
+        - All directory names must be lowercase
+        - Use kebab-case for multi-word directory names
+
+        Date Handling:
+        - Never use new Date() without parameters
+        - Never create a date based on the current system time
+        - Always explicitly specify date parameters
+        - For current date needs, use a dedicated service (e.g., DateProvider)
+
+        External Libraries:
+        - External libraries can only be used in adapters (src/adapters)
+        - Hexagon (src/hexagone) must remain framework and library agnostic
+        - All external dependencies must be abstracted through interfaces in /src/hexagone
+        - Use dependency injection to provide external library implementations
+
+        Error Handling:
+        - Never throw errors outside /src/hexagone
+        - Errors other than "Error" must end with "Exception"
+
+        Testing:
+        - All tests must be in the same folder as the code they are testing
+        - All unit tests must be in /src/hexagone/tests/unit and must be named like "<class-name>.spec.ts"
+        - All integration tests must be in /src/adapters/secondary and must be named like "<class-name>.it.spec.ts"
+        - All e2e tests must be in /src/adapters/primary and must be named like "<class-name>.e2e.spec.ts"
+        - All use cases must be tested with unit tests using Stub
+        - All services must be tested with unit tests
+        - All gateways must be tested with integration tests
+        - All repositories must be tested with integration tests
+        - All controllers must be tested with e2e tests
+        - All tests must start with "Doit" or "Ne doit pas"
+        - Use "test" instead of "it" for tests
+        - Don't use toBeTruthy or toBeFalsy
+        - Use toEqual instead of toBe when comparing values
+        - Unit tests must be using Stub Repositories, Stub Gateways and Stub Services instead of the real ones or mocks
+        - Unit tests must cover all code paths
+        - Integration tests must cover all code paths
+
+        Comments:
+        - All functions / methods must be commented
+        - All function / method parameters must be commented
+
+        Frontend Naming:
+        - Use "handle" prefix for event listeners
+        - Use "render" prefix for functions that return content
+
+        Frontend Components:
+        - Components must have .tsx extension
+        - One component per file
+        - Develop new components as functional components (not class components)
+        - Declare functions that don't use React elements outside the component
+        - Don't use indexes in keys
+        - Handle spam clicks on buttons with disabled attribute and optionally a loader
+        - Handle loading and error cases for API calls
+        - JSX conditional rendering must use boolean values (use !!variable to convert to boolean when necessary) to avoid displaying text in render
+
+        Frontend Styling:
+        - Use CSS Module SASS with one SCSS file per component: ComponentName.module.scss
+        - No inline CSS
+        - Add identifiers to unique elements for targeting
+        - Use SCSS variables for colors and font-weight
+        - Use !important only when absolutely necessary (impossible to target element more precisely)
+        - Style file must be imported last in the component
+
+        CSS Naming Conventions:
+        - Use ID for unique elements, class for multiple elements
+        - Use kebab-case for all CSS selectors
+        - Use descriptive names that indicate the element's purpose
+        - Use consistent prefixes: # for IDs, . for classes
+        - Use semantic naming that reflects the element's function or content
+        - Group related elements with consistent naming patterns
+        - Use lowercase letters only
+        - Separate words with hyphens
+        - Be specific but concise in naming
+        - For containers: #<entity>-<type> (example: #users-list, #products-grid)
+        - For items within containers: .<id>-<type> (example: .user-123-item, .product-456-card)
+        - For actions: #<action>-<entity>-<type> (example: #create-user-button, #delete-product-link)
+        - For filters: #<name>-<entity>-<type> (example: #search-users-input, #filter-products-select)
+        - For components: #<name>-<component-type> (example: #user-profile-modal, #product-details-drawer)
+
+        Table Page:
+        - Macro filters: #<name>-macrofilter (example: #brouillon-macrofilter)
+        - Filters: #<name>-<entities>-<field-type> (example: #statut-factures-select or #search-factures-input)
+        - Table: #<entities>-table (example: #factures-table)
+        - Table rows: .<id>-row (example: .671a637c5732b54f9a3ef2e5-row)
+        - Table cells: .<column-name>-cell (example: .statut-cell)
+        - Buttons in table cells: .<action>-button (example: .remove-button)
+        - Action buttons outside table: #<action>-<entity(ies)>-button (example: #download-factures-button or #create-facture-button)
+
+        List:
+        - List: #<entities>-list (example: #factures-list)
+        - List items: .<id>-item (example: .671a637c5732b54f9a3ef2e5-item)
+
+        Tag:
+        - .<value>-tag (example: .lost-tag)
+
+        Modal, Drawer, Popover:
+        - #<name>-<field-type> (example: #validation-confirmation-modale or #creation-facture-drawer)
